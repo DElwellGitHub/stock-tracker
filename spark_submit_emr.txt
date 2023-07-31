@@ -1,0 +1,1 @@
+spark-submit --master yarn --deploy-mode client --name wcd-streaming-app --jars /usr/lib/hudi/hudi-spark-bundle.jar,/usr/lib/spark/external/lib/spark-avro.jar --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 --conf "spark.serializer=org.apache.spark.serializer.KryoSerializer" --conf "spark.sql.hive.convertMetastoreParquet=false" s3://wcd-final/jars/pyspark_job.py

@@ -1,0 +1,24 @@
+#This script loops thru our Dow 30 stocks for the API call in Nifi
+
+from org.apache.commons.io import IOUtils
+from java.nio.charset import StandardCharsets
+from org.apache.nifi.processor.io import StreamCallback
+
+stocks = ['AXP','AMGN','AAPL','BA','CAT','CSCO','CVX','GS','HD','HON',
+		  'IBM','INTC','JNJ','KO','JPM','MCD','MMM','MRK','MSFT','NKE','PG','TRV',
+		  'UNH','CRM','VZ','V','WBA','WMT','DIS','DOW']
+
+class PyStreamCallback(StreamCallback):
+    def __init__(self):
+        pass
+    def process(self, inputStream, outputStream):
+        for s in stocks:
+            stock = str(s)
+            flowFile = session.create()
+            flowFile = session.putAttribute(flowFile, "stock", stock)
+            session.transfer(flowFile,REL_SUCCESS)
+
+flowFile = session.get()
+if (flowFile != None):
+    flowFile = session.write(flowFile, PyStreamCallback())
+    session.transfer(flowFile, REL_SUCCESS)

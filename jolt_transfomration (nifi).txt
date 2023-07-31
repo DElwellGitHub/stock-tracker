@@ -1,0 +1,17 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "ticker": {
+        "ticker": "symbol",
+        "todaysChangePerc": "change_percent",
+        "todaysChange": "change_dollar",
+        "day": {
+          "o": "open",
+          "h": "high",
+          "l": "low"
+        }
+      }
+    }
+  }
+]
