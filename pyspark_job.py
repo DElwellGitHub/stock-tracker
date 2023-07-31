@@ -2,16 +2,12 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
-# NOTE: This variable needs to be reviewed if we are working with a new MSK -- what to do if running in docker?
-#BOOTSTRAP_SERVERS='b-2.finalprojectmsk.4qbp1l.c14.kafka.us-west-2.amazonaws.com:9092,b-1.finalprojectmsk.4qbp1l.c14.kafka.us-west-2.amazonaws.com:9092,b-3.finalprojectmsk.4qbp1l.c14.kafka.us-west-2.amazonaws.com:9092'
 BOOTSTRAP_SERVERS='b-3.finalmskcluster.lsk05g.c14.kafka.us-west-2.amazonaws.com:9092,b-2.finalmskcluster.lsk05g.c14.kafka.us-west-2.amazonaws.com:9092,b-1.finalmskcluster.lsk05g.c14.kafka.us-west-2.amazonaws.com:9092'
 if __name__ == "__main__":
    spark = SparkSession.builder.getOrCreate()
 
-   # NOTE: we cant load the schema file from the local machine anymore, so we have to pull it from s3
    schema = spark.read.option('multiline','True').json('s3://wcd-final/schema.json').schema
 
- # We have to connect to the bootstrap servers, instead of kafka:9092
    df = spark \
        .readStream \
        .format("kafka") \
@@ -21,10 +17,7 @@ if __name__ == "__main__":
        .load()
 
    transform_df = df.select(col("value").cast("string")).alias("value").withColumn("jsonData",from_json(col("value"),schema)).select("jsonData.payload.after.*")
-   
-   #transform_df = transform_df.withColumn('event_time', lit(1234))
 
-   # NOTE: We cannot checkpoint to a local machine because we are working on the cloud. S3 is a reliable location for the cluster
    checkpoint_location = "s3://wcd-final/sparkjob"
 
    table_name = 'stocks'
