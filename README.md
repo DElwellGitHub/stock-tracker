@@ -2,6 +2,8 @@
 ## Overview
 This is a real-time streaming application that uses Apache Nifi to call API to gather stock price on Dow Jones Industrial Average companies. Other tools used include Kafka, EMR and Athena. This was my final project for WeCloudData's Data Engineering bootcamp.
 
+Below are slides from my presentation on this project.
+
 ![image](https://github.com/DElwellGitHub/stock-tracker/assets/26678347/be4bb137-b3c9-4649-8c20-af8d0dfa578f)
 
 ![image](https://github.com/DElwellGitHub/stock-tracker/assets/26678347/7a3fe70a-0b2e-4ac7-be36-87317648806c)
