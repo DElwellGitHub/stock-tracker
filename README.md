@@ -4,8 +4,9 @@ This is a real-time streaming application that uses Apache Nifi to call API to g
 
 ### Video of stock dashboard
 To view a video of this dashboard in action, please [click here](https://www.youtube.com/watch?v=zYZ0F7t971s).
+![image](https://github.com/DElwellGitHub/stock-tracker/assets/26678347/46f661bb-49ac-442f-b51e-b05691ad3acb)
 
-### Slides from Data Engineering bootcamp presentation
+### Slides from my Data Engineering bootcamp presentation on this project
 
 ![image](https://github.com/DElwellGitHub/stock-tracker/assets/26678347/be4bb137-b3c9-4649-8c20-af8d0dfa578f)
 
